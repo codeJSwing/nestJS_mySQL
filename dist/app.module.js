@@ -12,6 +12,7 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const database_module_1 = require("./database/database.module");
 const config_1 = require("@nestjs/config");
+const product_module_1 = require("./product/product.module");
 const Joi = require("@hapi/joi");
 let AppModule = class AppModule {
 };
@@ -29,7 +30,8 @@ exports.AppModule = AppModule = __decorate([
                     PORT: Joi.number(),
                 })
             }),
-            database_module_1.DatabaseModule
+            database_module_1.DatabaseModule,
+            product_module_1.ProductModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

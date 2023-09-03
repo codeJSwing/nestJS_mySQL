@@ -10,13 +10,27 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const database_module_1 = require("./database/database.module");
 const config_1 = require("@nestjs/config");
+const Joi = require("@hapi/joi");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [config_1.ConfigModule.forRoot()],
+        imports: [
+            config_1.ConfigModule.forRoot({
+                validationSchema: Joi.object({
+                    POSTGRES_HOST: Joi.string().required(),
+                    POSTGRES_PORT: Joi.string().required(),
+                    POSTGRES_USER: Joi.string().required(),
+                    POSTGRES_PASSWORD: Joi.string().required(),
+                    POSTGRES_DB: Joi.string().required(),
+                    PORT: Joi.number(),
+                })
+            }),
+            database_module_1.DatabaseModule
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })
